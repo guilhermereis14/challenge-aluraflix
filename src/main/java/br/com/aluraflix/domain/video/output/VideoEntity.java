@@ -1,6 +1,7 @@
 package br.com.aluraflix.domain.video.output;
 
 import br.com.aluraflix.domain.common.BaseModel;
+import br.com.aluraflix.infraestructure.exception.ServiceException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +35,9 @@ public class VideoEntity extends BaseModel {
         this.status = Status.VISIBLE;
     }
 
-    public void changeStatusToHidden() {
+    public void markToHidden() {
+        if(Status.HIDDEN.equals(this.status))
+            throw new ServiceException("Vídeo já está oculto!");
         this.status = Status.HIDDEN;
     }
 }
